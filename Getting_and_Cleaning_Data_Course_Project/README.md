@@ -19,7 +19,7 @@ The R script run_analysis.R can be used to create the data set. It retrieves the
 data set and transforms it to produce the final data set by implementing the following 
 steps (see the Code book for details, as well as the comments in the script itself):
   
-*Download and unzip source data if it doesn't exist.
+####Download and unzip source data if it doesn't exist.
 *Read data.
 *Merge the training and the test sets to create one data set.
 *Extract only the measurements on the mean and standard deviation for each measurement.
