@@ -1,0 +1,57 @@
+---
+title: "Statistical Inference Course Project"
+author: "Ashish Ranjan"
+date: "August 27, 2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Part 1: Simulation Exercise Instructions
+
+## Overview
+
+In this project you will investigate the exponential distribution in R and compare it with the Central Limit Theorem. The exponential distribution can be simulated in R with rexp(n, lambda) where lambda is the rate parameter. The mean of exponential distribution is 1/lambda and the standard deviation is also 1/lambda. Set lambda = 0.2 for all of the simulations. You will investigate the distribution of averages of 40 exponentials. Note that you will need to do a thousand simulations.
+
+## Question 1 : Show the sample mean and compare it to the theoretical mean distribution
+
+```{r }
+n <- 40
+Simulations <- 1000
+Lambda <- 0.2
+
+SampleMean <- NULL
+for(i in 1:Simulations) {
+  SampleMean <- c(SampleMean, mean(rexp(n, Lambda)))
+}
+mean(SampleMean)
+```
+So, as we can see, compared to the theoretical mean distribution of 5 , our mean 5 is close.
+
+## Question 2: Show the sample is (via variance) and compare it to the thoretical variance of the distribtution.
+The theoretical standard deviation of the distribution is also 1/lambda , which, for a lambda of 0.2 , equates to 5 . The variance is the square of the standard deviation, which is 25 .
+```{r }
+Variance <- var(SampleMean)
+Variance
+```
+0.6 is close to the theoretical distribution.
+
+## Question 3: Show that the distribution is approximately normal.
+
+```{r}
+hist(SampleMean, breaks = n, prob = T, col = "grey", xlab = "Means")
+x <- seq(min(SampleMean), max(SampleMean), length = 100)
+lines(x, dnorm(x, mean = 1/Lambda, sd = (1/Lambda/sqrt(n))), pch = 50, col = "red")
+```
+
+```{r}
+qqnorm(SampleMean)
+qqline(SampleMean, col = "blue")
+```
+
+The distribution averages of 40 exponentials is very close to a normal distribution
+
